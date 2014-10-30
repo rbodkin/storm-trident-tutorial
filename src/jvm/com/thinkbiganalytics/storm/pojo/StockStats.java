@@ -23,9 +23,9 @@ public class StockStats {
             init( 0.0, 0L );
             return;
         } else if (null == val1 && !(null == val2)) {
-            init( val2.avgPrice, val2.shareVolume );
+            init( val2 );
         } else if (!(null == val1) && (null == val2)) {
-            init( val1.avgPrice, val1.shareVolume );
+            init( val1 );
         } else {
 
             count = val1.count + val2.count;
@@ -42,7 +42,18 @@ public class StockStats {
         }
     }
 
-    public StockStats( final double price, final long shares ) {
+    private void init(StockStats val) {
+    	count = val.count;
+    	sum = val.sum;
+    	low = val.low;
+    	high = val.high;
+        shareVolume = val.shareVolume;
+        priceVolume = val.priceVolume;
+        avgPrice = sum / count;
+        weightedAvgPrice = priceVolume / shareVolume;
+	}
+
+	public StockStats( final double price, final long shares ) {
         init( price, shares );
     }
 
